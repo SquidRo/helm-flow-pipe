@@ -4,6 +4,13 @@
 
 goflow:
   enabled: true
+  dev:
+    enabled: true
+    # use --set goflow.dev.workdir=${PWD} to replace it
+    workdir: /home/manager/goflow2
+  cmdstr: "sleep infinity"
+
+  #cmdstr: "sleep 15; /build/goflow2 -transport.kafka.brokers=${rel_name}-kafka.${rel_namespace}:9092 -transport=kafka -transport.kafka.topic=flows -format=bin"
 
 kafka:
   enabled: true
@@ -20,13 +27,13 @@ kafka:
         cpu: 250m
 
 altinity-clickhouse-operator:
-  enabled: true
+  enabled: false
 
 clickhouse-instance:
   name-suffix: "db"
 
 grafana:
-  enabled: true
+  enabled: false
 
   adminPassword: grafana
   service:
@@ -73,7 +80,7 @@ grafana:
     default: "grafana-dashboards"
 
 prometheus:
-  enabled: true
+  enabled: false
 
   extraScrapeConfigs: |
     - job_name: 'goflow'
@@ -95,7 +102,7 @@ prometheus:
 
 # cleanup job to remove clickhouse CRD
 cleanup:
-  enabled: true
+  enabled: false
 
 ## Hyperkube image to use when cleaning up
 ##

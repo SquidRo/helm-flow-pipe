@@ -10,6 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+cmdstr: "sleep 15; /goflow2 -transport.kafka.brokers=${rel_name}-kafka.${rel_namespace}:9092
+    -transport=kafka -transport.kafka.topic=flows -format=bin"
+
 service:
   type: NodePort
   metric:
@@ -19,7 +22,7 @@ service:
     protocol: UDP
     port: 6343
   nflow:
-    protocol: UDP 
+    protocol: UDP
     port: 2055
 
 ingress:
@@ -39,16 +42,19 @@ resources:
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
     cpu: 100m
-    memory: 128Mi
+    memory: 512Mi
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 512Mi
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+dev:
+  enabled: false
 
 ### squid - end
 
