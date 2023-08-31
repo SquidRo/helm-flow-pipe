@@ -4,6 +4,18 @@
 
 goflow:
   enabled: true
+  dev:
+    enabled: false
+
+    # use --set goflow.dev.workdir=${PWD} to replace it
+    # mount workdir for develop env
+    workdir: /home/manager/goflow2
+
+  # overwrite the goflow2's original cmdstr for develop env
+  #cmdstr: "sleep infinity"
+
+  # another example
+  #cmdstr: "sleep 15; /build/goflow2 -transport.kafka.brokers=${rel_name}-kafka.${rel_namespace}:9092 -transport=kafka -transport.kafka.topic=flows -format=bin"
 
 kafka:
   enabled: true

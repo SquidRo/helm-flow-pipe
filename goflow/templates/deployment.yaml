@@ -24,22 +24,41 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+
+      {{- if .Values.dev.enabled }}
+      volumes:
+        - name: host-mount
+          hostPath:
+            path: {{ .Values.dev.workdir }}
+      {{- end }}
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+      # for dev env setup
+      {{- if .Values.dev.enabled }}
+          volumeMounts:
+            - name: host-mount
+              mountPath: /src
+
+      {{- end }}
           command:
             - /bin/sh
             - '-c'
-            - >-
-              sleep 15; /goflow -kafka.brokers
-              {{.Release.Name}}-kafka.{{.Release.Namespace}}:9092
-              -kafka.topic flows -proto.fixedlen=true
+            - |
+              /bin/sh <<'EOF'
+              rel_name={{.Release.Name}}
+              rel_namespace={{.Release.Namespace}}
+              {{ .Values.cmdstr }}
+              EOF
+
           ports:
             - name: metric
               containerPort: 8080
               protocol: TCP
-            - name: sflow 
+            - name: sflow
               containerPort: 6343
               protocol: UDP
             - name: nflow
