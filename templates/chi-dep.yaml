@@ -44,6 +44,10 @@ spec:
                 mountPath: /tmp/flow.proto
                 subPath: flow.proto
                 readOnly: true
+              - name: volume-csv
+                mountPath: /tmp/protocols.csv
+                subPath: protocols.csv
+                readOnly: true
         volumes:
               - name: volume-initdb
                 configMap:
@@ -51,4 +55,7 @@ spec:
               - name: volume-proto
                 configMap:
                   name: {{.Release.Name}}-cm-proto
+              - name: volume-csv
+                configMap:
+                  name: {{.Release.Name}}-cm-csv
 
