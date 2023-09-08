@@ -9,6 +9,8 @@ metadata:
   name: {{ $.Release.Name }}-cm-initdb
   {{- else if contains "flow.proto" $key }}
   name: {{ $.Release.Name }}-cm-proto
+  {{- else if contains "protocols.csv" $key }}
+  name: {{ $.Release.Name }}-cm-csv
   {{- end }}  
   namespace: {{ $.Release.Namespace }}
 data:
