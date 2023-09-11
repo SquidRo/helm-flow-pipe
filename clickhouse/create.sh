@@ -31,6 +31,9 @@ clickhouse client -n <<-EOSQL
         src_addr FixedString(16),
         dst_addr FixedString(16),
 
+        in_src_addr FixedString(16),
+        in_dst_addr FixedString(16),
+
         src_as UInt32,
         dst_as UInt32,
 
@@ -64,6 +67,9 @@ clickhouse client -n <<-EOSQL
         src_addr FixedString(16),
         dst_addr FixedString(16),
 
+        in_src_addr FixedString(16),
+        in_dst_addr FixedString(16),
+
         src_as UInt32,
         dst_as UInt32,
 
@@ -91,6 +97,9 @@ clickhouse client -n <<-EOSQL
 
         src_addr,
         dst_addr,
+
+        in_src_addr,
+        in_dst_addr,
 
         src_as,
         dst_as,
