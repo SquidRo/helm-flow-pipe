@@ -10,8 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-cmdstr: "sleep 15; /goflow2 -transport.kafka.brokers=${rel_name}-kafka.${rel_namespace}:9092
-    -transport=kafka -transport.kafka.topic=flows -format=bin"
+cmdstr: |
+  sleep 15
+  /goflow2 -transport.kafka.brokers={{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092 \
+  -transport=kafka -transport.kafka.topic=flows -format=bin
 
 service:
   type: NodePort

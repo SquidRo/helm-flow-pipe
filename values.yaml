@@ -12,10 +12,13 @@ goflow:
     workdir: /home/manager/goflow2
 
   # overwrite the goflow2's original cmdstr for develop env
-  #cmdstr: "sleep infinity"
+  #cmdstr: sleep infinity
 
   # another example
-  #cmdstr: "sleep 15; /build/goflow2 -transport.kafka.brokers=${rel_name}-kafka.${rel_namespace}:9092 -transport=kafka -transport.kafka.topic=flows -format=bin"
+  #cmdstr: |
+  #  sleep 15
+  #  /goflow2 -transport.kafka.brokers={{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092 \
+  #  -transport=kafka -transport.kafka.topic=flows -format=bin
 
 kafka:
   enabled: true

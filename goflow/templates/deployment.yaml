@@ -49,9 +49,7 @@ spec:
             - '-c'
             - |
               /bin/sh <<'EOF'
-              rel_name={{.Release.Name}}
-              rel_namespace={{.Release.Namespace}}
-              {{ .Values.cmdstr }}
+              {{ tpl (.Values.cmdstr) . | nindent 14 }}
               EOF
 
           ports:
