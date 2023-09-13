@@ -10,6 +10,7 @@ Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 ```console
 git clone https://github.com/SquidRo/helm-flow-pipe
 cd helm-flow-pipe
+git submodule update --init
 helm install {release} -n {namespace} .
 ```
 
