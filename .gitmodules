@@ -1,0 +1,3 @@
+[submodule "goflow2-src"]
+	path = goflow2-src
+	url = https://github.com/SquidRo/goflow2
