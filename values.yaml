@@ -55,6 +55,7 @@ grafana:
   adminPassword: grafana
   service:
     type: NodePort
+    nodePort: 31666
 
   plugins: vertamedia-clickhouse-datasource
 
@@ -91,10 +92,16 @@ grafana:
         disableDeletion: false
         editable: true
         options:
-          path: /var/lib/grafana/dashboards/default
+          path: /tmp/dashboards
 
-  dashboardsConfigMaps:
-    default: "grafana-dashboards"
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      folder: /tmp/dashboards
+
+#  dashboardsConfigMaps:
+#    default: "grafana-dashboards"
 
 prometheus:
   enabled: true

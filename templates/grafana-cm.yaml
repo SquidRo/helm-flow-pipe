@@ -1,15 +1,15 @@
+{{- range $key, $value := .Files }}
+{{- if hasPrefix "grafana/" $key }}
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboards
+  name: {{ trimPrefix "grafana/" $key }}-cm
+  namespace: {{ $.Release.Namespace }}
   labels:
     grafana_dashboard: "1"
 data:
-{{- $files := .Files }}
-{{- range $key, $value := .Files }}
-{{- if hasPrefix "grafana/" $key }}
-
-{{ trimPrefix "grafana/" $key | indent 2 }} : |
+  {{ trimPrefix "grafana/" $key }} : |
 {{ $.Files.Get $key | indent 4 }}
 
 {{- end }}

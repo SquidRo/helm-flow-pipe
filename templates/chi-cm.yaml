@@ -1,4 +1,3 @@
-{{- $files := .Files }}
 {{- range $key, $value := .Files }}
 {{- if hasPrefix "clickhouse/" $key }}
 ---
